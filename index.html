@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PORTFOLIO">
+  <meta property="og:description" content="SANDWOOD PORTFOLIO WEBSITE">
+  <meta property="og:image" content="http://www.sandwood.co.kr/">
+  <meta property="og:url" content="http://www.sandwood.co.kr/port_thumbnail.jpg">
+  <title>SANDWOOD</title>
+  <link rel="stylesheet" type="text/css" href="css/materialize.min.css" media="screen,projection" />
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link rel="icon" href="img/sandwood_logo_.jpg">
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+
+  <script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+  <script type="text/javascript" src="js/portfolio_obj.js"></script>
+  <script type="text/javascript" src="js/scroll_sw.js"></script>
+  <script type="text/javascript" src="js/ifmobile.js"></script>
+
+
+  <script>
+    var scroll_or_not = true;
+
+    $(document).ready(function () {
+      scroll_event();
+      $('.modal').modal({
+        dismissible: true,
+        opacity: .2,
+        inDuration: 300,
+        outDuration: 300,
+        startingTop: '4%',
+        endingTop: '4%',
+        ready: function () {
+          $("#modal_pages").mCustomScrollbar({
+            theme: "minimal-dark",
+            mouseWheel: {
+              scrollAmount: 500
+            },
+            documentTouchScroll: true,
+            contentTouchScroll: 25
+          });
+          $('.modal_wrapper .title_font_big1').addClass('active');
+          $('.modal_wrapper .title_font_big2').addClass('active');
+          $('.modal_wrapper .title_font_big3').addClass('active');
+          $('.modal_wrapper .right_side img').addClass('active');
+        },
+        complete: function () {
+          $("#modal_pages").mCustomScrollbar('destroy');
+          $('.modal_wrapper .title_font_big1').removeClass('active');
+          $('.modal_wrapper .title_font_big2').removeClass('active');
+          $('.modal_wrapper .title_font_big3').removeClass('active');
+          $('.modal_wrapper .right_side img').removeClass('active');
+        }
+      });
+      $('.profile_ul li a').click(function () {
+        var temp = $(this).attr('id');
+        temp = temp.replace('scrollto_page_', '');
+        temp = temp - 1;
+        $('.modal_wrapper .title_font_big1').html(portfolio[temp].title);
+        $('.modal_wrapper .left_side_wrapper .title_font_big2').html(portfolio[temp].secondtitle);
+        $('.modal_wrapper .left_side_wrapper .content_top ').html(portfolio[temp].content);
+        $('.modal_wrapper .table_year').html(portfolio[temp].year);
+        $('.modal_wrapper .table_role').html(portfolio[temp].role);
+        $('.modal_wrapper .table_designer').html(portfolio[temp].designer);
+        $('.modal_wrapper .table_skills').html(portfolio[temp].skills);
+        $('.modal_wrapper .port_colors .chip .color_src1').attr('src', portfolio[temp].color1_img);
+        $('.modal_wrapper .port_colors .chip .color_src2').attr('src', portfolio[temp].color2_img);
+        $('.modal_wrapper .port_colors .chip .color_src3').attr('src', portfolio[temp].color3_img);
+        $('.modal_wrapper .port_colors .chip .color1').html(portfolio[temp].color1);
+        $('.modal_wrapper .port_colors .chip .color2').html(portfolio[temp].color2);
+        $('.modal_wrapper .port_colors .chip .color3').html(portfolio[temp].color3);
+        $('.modal_wrapper .right_side .port_capture').attr('src', portfolio[temp].capture);
+
+        $('.modal .modal_wrapper .title_font_big1').css('background-color', portfolio[temp].color3);
+        $('.modal .modal_wrapper .title_font_big1').css('color', '#fff');
+        if (portfolio[temp].color3 == '#ffffff' || portfolio[temp].color3 == '#f3f3f3') {
+          $('.modal .modal_wrapper .title_font_big1').css('color', portfolio[temp].color2);
+        }
+
+        $('.modal .modal_wrapper').css('color', '#333');
+        if (portfolio[temp].color2 == '#000000') {
+          $('.modal .modal_wrapper').css('color', '#fff');
+          $('.modal .modal_wrapper').css('background-color', '#111');
+        } else if (portfolio[temp].color2 == '#017d72') {
+          $('.modal .modal_wrapper').css('color', '#fff');
+          $('.modal .modal_wrapper').css('background-color', portfolio[temp].color2);
+        } else if (portfolio[temp].color2 == '#fcefcd') {
+          $('.modal .modal_wrapper').css('color', '#333');
+          $('.modal .modal_wrapper').css('background-color', portfolio[temp].color2);
+        } else if (portfolio[temp].color2 == '#f0eef1') {
+          $('.modal .modal_wrapper').css('color', '#333');
+          $('.modal .modal_wrapper').css('background-color', portfolio[temp].color2);
+        } else if (portfolio[temp].color2 == '#f9dcd8') {
+          $('.modal .modal_wrapper').css('color', '#333');
+          $('.modal .modal_wrapper').css('background-color', portfolio[temp].color2);
+        } else if (portfolio[temp].color2 == '#e2bb85') {
+          $('.modal .modal_wrapper').css('color', '#fff');
+          $('.modal .modal_wrapper').css('background-color', portfolio[temp].color2);
+        } else if (portfolio[temp].color2 == '#ffffff') {
+          $('.modal .modal_wrapper .modal_content').css('color', '#333');
+          $('.modal .modal_wrapper').css('background-color', portfolio[temp].color2);
+        } else if (portfolio[temp].color2 == '#f3f3f3') {
+          $('.modal .modal_wrapper').css('background-color', '#fff');
+          $('.modal .modal_wrapper').css('color', '#333');
+        } else if (portfolio[temp].color2 == '#aac456' || portfolio[temp].color2 == '#11639b') {
+          $('.modal .modal_wrapper').css('color', '#fff');
+          $('.modal .modal_wrapper').css('background-color', portfolio[temp].color2);
+        } else {
+          $('.modal .modal_wrapper').css('background-color', portfolio[temp].color2);
+        }
+      })
+      $('#menu').click(function () {
+        $('.tap_target').addClass('open');
+      })
+      $('.menu_close').click(function () {
+        $('.tap_target').removeClass('open');
+      })
+      $('.tap_target.open')
+      $('.page_goback').click(function () {
+        scroll_or_not = true;
+        $('.wrapper.active .inner_wrapper').css('overflow-y', 'hidden');
+        $(".wrapper.active .inner_wrapper").mCustomScrollbar("destroy");
+
+        var current_page = $(this).context.id;
+        current_page = current_page.replace('page_main', '');
+        current_page = current_page.replace('_back', '');
+        current_page = parseInt(current_page);
+
+        setTimeout(function () {
+          $('#profile_ul' + current_page + ' li').css('opacity', 0);
+        }, 1600);
+
+        setTimeout(function () {
+          if (current_page == 1) {
+            parallax.enable();
+          } else if (current_page == 2) {
+            parallax2.enable();
+          } else if (current_page == 3) {
+            parallax3.enable();
+          }
+          //						else if(current_page == 4){
+          //							parallax4.enable();
+          //						}
+        }, 1600);
+
+        $('#bottom_nav_wrapper').removeClass('hide_');
+        $('.center_nav_mobile').removeClass('hide_');
+        $('#touchsurface').removeClass('active');
+
+        setTimeout(function () {
+          $('#page_main' + current_page).removeClass('active');
+          $('#page_main' + current_page + ' li:nth-child(2)').removeClass('active');
+        }, 400);
+
+        setTimeout(function () {
+          $('.page' + current_page + ' .page_title').removeClass('hide_');
+          $('.page' + current_page + ' .page_title .page_top').removeClass('hide_');
+          $('.page' + current_page + ' .page_content').removeClass('active');
+          $('.page_content .col .row').removeClass('active');
+
+          $('.left_nav_mobile').removeClass('hide_');
+          $('.right_nav_mobile').removeClass('hide_');
+        }, 800);
+
+        $('.page_main').css('cursor', 'pointer');
+      })
+
+      if (isMobile == false) {
+        $('.page_main').click(function () {
+          parallax_disable_all();
+          scroll_or_not = false;
+
+          var current_page = $(this).context.id;
+          current_page = current_page.replace('page_main', '');
+          current_page = current_page.replace('_back', '');
+          current_page = parseInt(current_page);
+
+
+          $('#bottom_nav_wrapper').addClass('hide_');
+          $('.center_nav_mobile').addClass('hide_');
+
+          $('.left_nav_mobile').addClass('hide_');
+          $('.right_nav_mobile').addClass('hide_');
+
+          setTimeout(function () {
+            $('#page_main' + current_page).addClass('active');
+            $('#page_main' + current_page).addClass('active');
+            $('#page_main' + current_page + ' li:nth-child(2)').addClass('active');
+          }, 600);
+
+          setTimeout(function () {
+            $('.page' + current_page + ' .page_title').addClass('hide_');
+            $('.page' + current_page + ' .page_title .page_top').addClass('hide_');
+            $('.page' + current_page + ' .page_content').addClass('active');
+          }, 1000);
+
+          setTimeout(function () {
+            Materialize.showStaggeredList('#profile_ul' + current_page);
+            $('#touchsurface').addClass('active');
+            $('.page_content .col .row').addClass('active');
+          }, 1500);
+
+          setTimeout(function () {
+            $('.wrapper.active .inner_wrapper').css('overflow-y', 'auto');
+            $(".wrapper.active .inner_wrapper").mCustomScrollbar({
+              theme: "minimal-dark",
+              documentTouchScroll: 1,
+              contentTouchScroll: 25
+            });
+            $('.page_main').css('cursor', 'inherit');
+
+            parallax_disable_all();
+          }, 1800)
+        });
+        $('.bottom_nav_trigger a').click(function () {
+          var want_page = $(this).attr('id');
+          want_page = want_page.replace('bot_nav_trig_', '');
+
+          var current_nav = $('.bottom_nav_trigger a.active').attr('id');
+          current_nav = current_nav.replace('bot_nav_trig_', '');
+
+          $('.bottom_nav_trigger a').removeClass('active');
+          $('.bottom_nav_trigger a:nth-child(' + want_page + ')').addClass('active');
+
+          bottom_nav(want_page, current_nav);
+
+
+          setTimeout(function () {
+            if ($('.page1').hasClass('active')) {
+              $('.bottom_nav .left-align').css('opacity', 0);
+              $('.bottom_nav .right-align').css('opacity', 1);
+            } else {
+              $('.bottom_nav .left-align').css('opacity', 1);
+            }
+
+            if ($('.page3').hasClass('active')) {
+              $('.bottom_nav .right-align').css('opacity', 0);
+              $('.bottom_nav .left-align').css('opacity', 1);
+            } else {
+              $('.bottom_nav .right-align').css('opacity', 1);
+            }
+          }, 1000);
+
+        })
+      }
+      else {
+        $('.page_main')
+          .on('touchstart', function () {
+            $(this).data('moved', '0');
+          })
+          .on('touchmove', function () {
+            $(this).data('moved', '1');
+          })
+          .on('touchend', function () {
+            if ($(this).data('moved') == 0) {
+              parallax_disable_all();
+              scroll_or_not = false;
+
+              var current_page = $(this).context.id;
+              current_page = current_page.replace('page_main', '');
+              current_page = current_page.replace('_back', '');
+              current_page = parseInt(current_page);
+
+
+              $('#bottom_nav_wrapper').addClass('hide_');
+              $('.center_nav_mobile').addClass('hide_');
+
+              $('.left_nav_mobile').addClass('hide_');
+              $('.right_nav_mobile').addClass('hide_');
+
+              setTimeout(function () {
+                $('#page_main' + current_page).addClass('active');
+                $('#page_main' + current_page).addClass('active');
+                $('#page_main' + current_page + ' li:nth-child(2)').addClass('active');
+              }, 600);
+
+              setTimeout(function () {
+                $('.page' + current_page + ' .page_title').addClass('hide_');
+                $('.page' + current_page + ' .page_title .page_top').addClass('hide_');
+                $('.page' + current_page + ' .page_content').addClass('active');
+              }, 1000);
+
+              setTimeout(function () {
+                Materialize.showStaggeredList('#profile_ul' + current_page);
+                $('#touchsurface').addClass('active');
+                $('.page_content .col .row').addClass('active');
+              }, 1500);
+
+              setTimeout(function () {
+                $('.wrapper.active .inner_wrapper').css('overflow-y', 'auto');
+                $(".wrapper.active .inner_wrapper").mCustomScrollbar({
+                  theme: "minimal-dark",
+                  documentTouchScroll: 1,
+                  contentTouchScroll: 25
+                });
+                $('.page_main').css('cursor', 'inherit');
+
+                parallax_disable_all();
+              }, 1800)
+            }
+          });
+        $('.center_nav_mobile a').click(function () {
+          var want_page = $(this).attr('id');
+          want_page = want_page.replace('mobile_trig_', '');
+
+          var current_nav = $('.center_nav_mobile a.active').attr('id');
+          current_nav = current_nav.replace('mobile_trig_', '');
+
+          $('.center_nav_mobile a').removeClass('active');
+          $('.center_nav_mobile a:nth-child(' + want_page + ')').addClass('active');
+
+          bottom_nav(want_page, current_nav);
+
+          setTimeout(function () {
+            if ($('.page1').hasClass('active')) {
+              $('.left_nav_mobile').css('display', 'none');
+              $('.right_nav_mobile').css('display', 'flex');
+            } else {
+              $('.left_nav_mobile').css('display', 'flex');
+            }
+
+            if ($('.page3').hasClass('active')) {
+              $('.right_nav_mobile').css('display', 'none');
+              $('.left_nav_mobile').css('display', 'flex');
+            } else {
+              $('.right_nav_mobile').css('display', 'flex');
+            }
+          }, 1000);
+
+        })
+      }
+
+      setTimeout(function () {
+        parallax_disable_all();
+        parallax.enable();
+      }, 500);
+
+      var el = document.getElementById('touchsurface');
+      swipedetect(el, function (swipedir) {
+        if (swipedir == 'right') {
+          //up
+
+          scroll_up();
+        } else if (swipedir == 'left') {
+          //down
+          scroll_down();
+        }
+      });
+
+
+      window.addEventListener("resize", function () {
+        var window_Height = window.innerHeight;
+        document.body.style.height = window_Height + 'px';
+      });
+    });
+
+    function bottom_nav(want_page, current_nav) {
+      if (want_page == current_nav) { } else if (want_page > current_nav) {
+        parallax_disable_all();
+        var next_page = '.page' + want_page;
+        var prev_page = '.page' + (current_nav);
+
+        $(next_page).addClass('active pt-page-moveFromRight pt-page-ontop');
+        $(next_page).one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function () {
+          $(next_page).removeClass('pt-page-moveFromRight pt-page-ontop');
+          next_page = next_page.replace('page', '').replace('.', '');
+          if (next_page == 1) {
+            parallax.enable();
+          } else if (next_page == 2) {
+            parallax2.enable();
+          } else if (next_page == 3) {
+            parallax3.enable();
+          }
+        });
+
+        $(prev_page).addClass('pt-page-scaleDown');
+        $(prev_page).one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function () {
+          $(prev_page).removeClass('active pt-page-scaleDown');
+          $('#touchsurface').off('scroll touchmove mousewheel');
+        });
+      } else if (want_page < current_nav) {
+        parallax_disable_all();
+        var next_page = '.page' + want_page;
+        var prev_page = '.page' + (current_nav);
+
+        $(prev_page).addClass('pt-page-scaleDown');
+        $(prev_page).one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function () {
+          $(prev_page).removeClass('active pt-page-scaleDown');
+        });
+
+        $(next_page).addClass('active pt-page-moveFromLeft pt-page-ontop');
+        $(next_page).one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function () {
+          $(next_page).removeClass('pt-page-moveFromLeft pt-page-ontop');
+          $('#touchsurface').off('scroll touchmove mousewheel');
+          next_page = next_page.replace('page', '').replace('.', '');
+          if (next_page == 1) {
+            parallax.enable();
+          } else if (next_page == 2) {
+            parallax2.enable();
+          } else if (next_page == 3) {
+            parallax3.enable();
+          }
+        });
+      }
+    }
+
+    function parallax_disable_all() {
+      parallax.disable();
+      parallax2.disable();
+      parallax3.disable();
+      //				parallax4.disable();
+    }
+  </script>
+</head>
+
+<body>
+  <div class="tap_target_wrapper">
+    <div class="tap_target">
+      <div class="tap_target_content center-align">
+        <div class="row">
+          <div class="col s12 profile_top">
+            <a href="#" class="menu_close red-text text-darken-2">〈</a>
+            <h2>Hello, Is it me you're looking for?</h2>
+            <img class="me_profile" width="150px;" src="img/me500.png" alt="">
+            <h5>Sangwoo Cho is a Seoul-based front-end designer,
+              <br> currently working at KrazyLab.</h5>
+            <br>
+            <h5>CONTACT</h5>
+            <a class="profile" href="mailto:sandwood09@gmail.com?subject=Hello!">Email</a>
+            <a class="profile" href="https://www.instagram.com/sandwood009/" target="_blank">Instagram</a>
+            <a class="profile" href="https://www.linkedin.com/in/cho-sangwoo-1517a1141/" target="_blank">LinkedIn</a>
+          </div>
+
+          <div class="col s12 m6 right-align profile_bottom">
+            <h5>SKILLS</h5>
+            <p>
+              · CSS3 <br> · HTML5 <br> · Javascript <br> · jQuery <br> · Git <br> · Photoshop <br> · Illustrator <br> ·
+              Nodejs <br> · Ajax <br>
+            </p>
+          </div>
+          <div class="col s12 m6 left-align profile_bottom">
+            <h5>PROFILE</h5>
+            <p>
+              Responsibilities: <br> ·Building responsive website solutions using the latest technologies <br>
+              ·Managing existing websites <br> ·Ensuring adherence to studio procedures <br>
+              <br> Attributes: <br> ·Proficient in HTML, CSS and JavaScript (jQuery) <br> ·Ability to write lean,
+              maintainable CSS using methodologies such as BEM <br> ·Ability to write quality, maintainable and
+              performant code <br> ·Keen eye for design detail, interaction and animation <br> ·Experience interacting
+              with third-party API’s <br>
+              <br> Bonus: <br> ·Working experience with database architecture
+            </p>
+          </div>
+          <div class="col s12 bottom_close">
+            <a href="#" class="menu_close">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav_wrapper row">
+    <div class="col s4 m4"><a id="menu" href="#"><span class="menu_text">About</span></a></div>
+    <div class="col s4 m4 main_logo center-align">
+      <a href="index.html"><img height="39px" src="img/sandwood_logo.svg" alt=""></a>
+    </div>
+  </div>
+
+  <div class="left_nav_wrapper vertical">
+    SANG WOO CHO
+  </div>
+
+  <div class="right_nav_wrapper vertical2">
+    SANDWOOD - WEB DESIGN
+  </div>
+
+  <!--		page start    -->
+  <div id="touchsurface" class="wrapper">
+
+    <div class="inner_wrapper page1 active">
+      <div class="row page_title">
+        <div class="col s12 page_top white-text">
+          01 - 03
+        </div>
+        <div id="page_main1" class="col page_main">
+
+          <ul id="scene" class="scene">
+            <li class="layer text" data-depth="0.40">
+              <img class="responsive-img" src="img/front_end.png">
+            </li>
+            <li class="layer" data-depth="0.20">
+              <img class="responsive-img" src="img/macbook.png">
+            </li>
+          </ul>
+
+        </div>
+      </div>
+      <div class="row page_content">
+        <div class="col s12">
+          <a href="#" id="page_main1_back" class="page_goback">〈 back</a>
+          <ul id="profile_ul1" class="profile_ul">
+            <li>
+              <a id="scrollto_page_1" href="#modal_pages">
+                <img width="100%" src="img/projects/111.jpg" alt="">
+                <p>01 - Aēsop</p>
+              </a>
+            </li>
+            <li>
+              <a id="scrollto_page_2" href="#modal_pages">
+                <img width="100%" src="img/projects/222.jpg" alt="">
+                <p>02 - Dain Media Art</p>
+              </a>
+            </li>
+            <li>
+              <a id="scrollto_page_3" href="#modal_pages">
+                <img width="100%" src="img/projects/333.jpg" alt="">
+                <p>03 - LG U+ (Mobile)</p>
+              </a>
+            </li>
+            <li>
+              <a id="scrollto_page_4" href="#modal_pages">
+                <img width="100%" src="img/projects/444.jpg" alt="">
+                <p>04 - Medici</p>
+              </a>
+            </li>
+            <li>
+              <a id="scrollto_page_5" href="#modal_pages">
+                <img width="100%" src="img/projects/555.jpg" alt="">
+                <p>05 - SSP Entertainment</p>
+              </a>
+            </li>
+            <li>
+              <a id="scrollto_page_6" href="#modal_pages">
+                <img width="100%" src="img/projects/666.jpg" alt="">
+                <p>06 - Greenmate</p>
+              </a>
+            </li>
+            <li>
+              <a id="scrollto_page_7" href="#modal_pages">
+                <img width="100%" src="img/projects/777.jpg" alt="">
+                <p>07 - Hana Card Gift Shop</p>
+              </a>
+            </li>
+            <li>
+              <a id="scrollto_page_8" href="#modal_pages">
+                <img width="100%" src="img/projects/888.jpg" alt="">
+                <p>08 - Pica Trade</p>
+              </a>
+            </li>
+            <li>
+              <a id="scrollto_page_9" href="#modal_pages">
+                <img width="100%" src="img/projects/999.jpg" alt="">
+                <p>09 - Lanello</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="inner_wrapper page2">
+      <div class="row page_title">
+        <div class="col s12 page_top white-text">
+          02 - 03
+        </div>
+        <div id="page_main2" class="col page_main">
+
+          <ul id="scene2" class="scene">
+            <li class="layer text" data-depth="0.40">
+              <img class="responsive-img" src="img/weddings.png">
+            </li>
+            <li class="layer" data-depth="0.20">
+              <img class="responsive-img" src="img/iphone.png">
+            </li>
+          </ul>
+
+        </div>
+      </div>
+      <div class="row page_content">
+        <div class="col s12">
+          <a href="#" id="page_main2_back" class="page_goback">〈 back</a>
+          <ul id="profile_ul2" class="profile_ul">
+            <li>
+              <a id="scrollto_page_10" href="#modal_pages">
+                <img width="100%" class="teal lighten-3" src="img/projects/wed/s_main.png" alt="">
+                <p>01 - Orange Buttercup</p>
+              </a>
+            </li>
+            <li>
+              <a id="scrollto_page_11" href="#modal_pages">
+                <img width="100%" class="teal lighten-3" src="img/projects/wed/w_main.png" alt="">
+                <p>02 - Cotton</p>
+              </a>
+            </li>
+            <li>
+              <a id="scrollto_page_12" href="#modal_pages">
+                <img width="100%" class="teal lighten-3" src="img/projects/wed/g_main.png" alt="">
+                <p>03 - Pink Buttercup</p>
+              </a>
+            </li>
+            <li>
+              <a id="scrollto_page_13" href="#modal_pages">
+                <img width="100%" class="teal lighten-3" src="img/projects/wed/s_card_main.png" alt="">
+                <p>04 - Tropical Card</p>
+              </a>
+            </li>
+            <li>
+              <a id="scrollto_page_14" href="#modal_pages">
+                <img width="100%" class="teal lighten-3" src="img/projects/wed/w_card_main.png" alt="">
+                <p>05 - Cotton Card</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="inner_wrapper page3">
+      <div class="row page_title">
+        <div class="col s12 page_top white-text">
+          03 - 03
+        </div>
+        <div id="page_main3" class="col page_main">
+
+          <ul id="scene3" class="scene">
+            <li class="layer text" data-depth="0.40">
+              <img class="responsive-img" src="img/printings.png">
+            </li>
+            <li class="layer" data-depth="0.20">
+              <img class="responsive-img" src="img/poster.png">
+            </li>
+          </ul>
+
+        </div>
+      </div>
+      <div class="row page_content">
+        <div class="col s12">
+          <a href="#" id="page_main3_back" class="page_goback">〈 back</a>
+          <ul id="profile_ul3" class="profile_ul">
+            <li>
+              <a id="scrollto_page_15" href="#modal_pages">
+                <img width="100%" class="red lighten-3" src="img/projects/wed/y_main.png" alt="">
+                <p>01 - Young Artist Concert Invitation</p>
+              </a>
+            </li>
+            <li>
+              <a id="scrollto_page_16" href="#modal_pages">
+                <img width="100%" class="red lighten-3" src="img/projects/wed/m_main.png" alt="">
+                <p>02 - Melting Market Poster</p>
+              </a>
+            </li>
+            <li>
+              <a id="scrollto_page_17" href="#modal_pages">
+                <img width="100%" class="red lighten-3" src="img/projects/wed/e_main.png" alt="">
+                <p>03 - Edith Ground Card</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--
+			<div class="inner_wrapper page4">
+				<div class="row page_title">
+					<div class="col s12 page_top white-text">
+						PROJECT 4 - 4
+					</div>
+					<div id="page_main4" class="col page_main">
+
+						<ul id="scene4" class="scene">
+							<li class="layer" data-depth="0.40">
+								<img class="responsive-img" src="img/wbc247.png">
+							</li>
+							<li class="layer" data-depth="0.20">
+								<img class="responsive-img" src="img/card.png">
+							</li>
+						</ul>
+				
+					</div>
+				</div>
+				<div class="row page_content">
+					<div class="col">
+						<a href="#" id="page_main4_back" class="page_goback">〈 back</a>
+						<ul id="profile_ul4" class="row profile_ul">
+							<li class="col s4"><dl>
+								<dt>PROJECT</dt>
+								<dd>Musical Dataviz website. With a serie of questions we will try to find your perfect and ‘worst‘ match.</dd>
+							</dl></li>
+							<li class="col s4"><dl>
+								<dt>TEAM</dt>
+								<dd>Adrien Vanderpotte — Development Chloé Chanteperdrix — Design Maximilien Jourdain — Development</dd>
+							</dl></li>
+							<li class="col s4"><dl>
+								<dt>ROLE</dt>
+								<dd>Design, Interface & Branding</dd>
+							</dl></li>
+						</ul>
+						<div class="row">
+							<div class="col s12">
+								<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui et excepturi recusandae suscipit quia iure vero nesciunt est molestias voluptatem optio facere dignissimos omnis, sunt possimus perferendis. Omnis, expedita, nostrum!</div>
+								<div>Nostrum nobis velit porro, in optio, magnam, natus laborum possimus qui placeat quidem laboriosam ea quod ipsa cumque illum a libero totam quia. Iure nisi temporibus dignissimos amet consequuntur delectus.</div>
+								<div>Doloremque officia tempore quia nemo doloribus aperiam ipsa aut dignissimos et quasi alias, odit! Molestiae quis inventore blanditiis, ad optio, nihil, beatae quibusdam, tempore nobis eius delectus. Quidem, quam, perspiciatis.</div>
+								<div>Deserunt reiciendis architecto consectetur, repellendus nesciunt dolor explicabo eum, nemo cupiditate, velit voluptatibus alias rerum doloremque hic cumque soluta quibusdam in ipsum! Laboriosam eligendi enim, labore molestiae placeat quidem possimus.</div>
+								<div>Tempore, eos, saepe. Nostrum, non quis facilis recusandae eligendi similique, officia, nemo, nesciunt voluptate repellat atque quia commodi laboriosam debitis qui. Iste voluptatum quaerat sed, incidunt eligendi, possimus animi. Libero!</div>
+								<div>Ex distinctio, aspernatur, maxime consequatur eos sed. Iure, quam quasi sequi asperiores? Vitae consectetur quaerat, aut nostrum maxime dolores iure vel id accusantium in! Atque ipsa deserunt porro minima, quibusdam.</div>
+								<div>Illo nesciunt beatae facilis eius laudantium, quibusdam nemo repellendus, placeat eligendi quo alias exercitationem magni, quam sit. Tempore natus fuga sunt beatae illum quis sed dicta quam cum, quia assumenda!</div>
+								<div>Harum neque commodi unde veniam provident reiciendis cumque voluptatem, cupiditate, culpa molestiae minus. Porro provident fugit, cum nam accusamus excepturi incidunt magnam, pariatur minima dolores quis sint doloremque quibusdam, amet?</div>
+								<div>Ex, tempore vel accusamus unde deserunt laborum aperiam dicta nihil, quasi libero, dolore eos cumque dignissimos et. Mollitia rerum, illo dolor commodi. Quam quis eligendi quos quae. Nihil sint, maxime.</div>
+								<div>Minima, beatae aut odit modi eos adipisci perspiciatis, quisquam illo. Est laboriosam magnam ratione vitae accusantium pariatur corporis dolore nisi explicabo quae, excepturi inventore eaque in quisquam itaque error unde.</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+-->
+
+  </div>
+
+  <div id="bottom_nav_wrapper" class="bottom_nav row">
+    <div class="col s2 m4 left-align">
+      <a href="#" onclick="scroll_up()"><img width="18px" src="img/left-arrow.svg" alt=""></a>
+    </div>
+    <div class="col s8 m4 center-align bottom_nav_trigger">
+      <div class="trigger_wrapper">
+        <a href="#!" id="bot_nav_trig_1" class="active"></a>
+        <a href="#!" id="bot_nav_trig_2"></a>
+        <a href="#!" id="bot_nav_trig_3"></a>
+        <!--					<a href="#!" id="bot_nav_trig_4"></a>-->
+      </div>
+    </div>
+    <div class="col s2 m4 right-align">
+      <a href="#" onclick="scroll_down()"><img width="18px" src="img/right-arrow.svg" alt=""></a>
+    </div>
+  </div>
+
+
+  <a href="#" onclick="scroll_up()" class="left_nav_mobile">
+    <img width="18px" src="img/left-arrow.svg" alt="">
+  </a>
+
+  <a href="#" onclick="scroll_down()" class="right_nav_mobile">
+    <img width="18px" src="img/right-arrow.svg" alt="">
+  </a>
+
+
+  <div class="center_nav_mobile">
+    <a href="#!" id="mobile_trig_1" class="active"></a>
+    <a href="#!" id="mobile_trig_2"></a>
+    <a href="#!" id="mobile_trig_3"></a>
+    <!--  <a href="#!" id="mobile_trig_4"></a>-->
+  </div>
+
+  <div class="modal" id="modal_pages">
+    <div class="modal_close">
+      <a href="#" id="modal_goback" onclick="$('#modal_pages').modal('close')">〈 close</a>
+    </div>
+    <div class="modal_wrapper">
+      <div class="title_font_big1 center-align"></div>
+      <div class="row modal_content">
+        <div class="col s12 l5 left_side">
+          <div class="left_side_wrapper">
+            <div class="title_font_big2"></div>
+            <div class="title_font_big3">
+              <span class="content_top">
+              </span>
+              <br><br>
+            </div>
+
+            <br><br>
+
+            <table>
+              <tbody>
+                <tr>
+                  <th>Year</th>
+                  <td class="table_year"></td>
+                </tr>
+                <tr>
+                  <th>Role</th>
+                  <td class="table_role"></td>
+                </tr>
+                <tr>
+                  <th>Designer</th>
+                  <td class="table_designer"></td>
+                </tr>
+                <tr>
+                  <th>Skills</th>
+                  <td class="table_skills"></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <br><br><br>
+            <div class="port_colors">
+              <div class="chip">
+                <img class="circle color_src1" src="" alt="">
+                <span class="color1"></span>
+              </div>
+              <div class="chip">
+                <img class="circle color_src2" src="" alt="">
+                <span class="color2"></span>
+              </div>
+              <div class="chip">
+                <img class="circle color_src3" src="" alt="">
+                <span class="color3"></span>
+              </div>
+            </div>
+            <br><br><br>
+
+          </div>
+        </div>
+        <div class="col s12 l7 right_side">
+          <img class="responsive-img port_capture" src="" alt="">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <script src="js/deploy/parallax.min.js"></script>
+  <script>
+    var scene = document.getElementById('scene');
+    var parallax = new Parallax(scene);
+
+    var scene2 = document.getElementById('scene2');
+    var parallax2 = new Parallax(scene2);
+
+    var scene3 = document.getElementById('scene3');
+    var parallax3 = new Parallax(scene3);
+  </script>
+
+
+</body>
+
+</html>
